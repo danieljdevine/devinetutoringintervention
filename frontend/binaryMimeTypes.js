@@ -16,4 +16,4 @@ module.exports = [
     'text/plain',
     'text/text',
     'text/xml'
-  ]
+]

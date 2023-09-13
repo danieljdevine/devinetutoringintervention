@@ -1,8 +1,9 @@
-service: devine-intervention-tutoring
+service: frontend
+frameworkVersion: "3"
 
 provider:
   name: aws
-  runtime: nodejs8.10
+  runtime: nodejs18.x
   stage: ${self:custom.secrets.NODE_ENV}
   region: eu-central-1
   environment: 
