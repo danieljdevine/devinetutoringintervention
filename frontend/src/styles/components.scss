@@ -105,6 +105,17 @@ h3.sub-header {
     
 }
 
+input {
+    background-color: transparent !important;
+    border-width: 0 0 2px !important;
+    border-color: $primary-blue-5 !important;
+    outline: 0 !important;
+
+    &:focus {
+        border-color: $primary-green-3 !important;
+    }
+}
+
 .side-text-box{
     @media screen and (max-width: 992px) {
         height: 300px;

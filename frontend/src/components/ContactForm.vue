@@ -9,6 +9,7 @@
                 >
                     <BFormInput
                         id="input-fn"
+                        variant="transparent"
                         v-model="form.firstName"
                         type="text"/>
                 </BFormGroup>
