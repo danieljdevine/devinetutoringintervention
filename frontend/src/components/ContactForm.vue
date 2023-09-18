@@ -1,7 +1,7 @@
 <template>
     <BForm @submit="onSubmit" :key="form.formKey">
-        <BRow class="g-0">
-            <BCol cols="6">
+        <BRow class="g-0 mb-4">
+            <BCol cols="12" sm="6" class="pe-sm-2 mb-4 mb-sm-0">
                 <BFormGroup
                     id="input-group-fn"
                     label="First Name"
@@ -9,12 +9,12 @@
                 >
                     <BFormInput
                         id="input-fn"
-                        variant="transparent"
+                        class="text-input"
                         v-model="form.firstName"
                         type="text"/>
                 </BFormGroup>
             </BCol>
-            <BCol cols="6">
+            <BCol cols="12" sm="6" class="ps-sm-2">
                 <BFormGroup
                     id="input-group-ln"
                     label="Last Name"
@@ -22,13 +22,14 @@
                 >
                     <BFormInput
                         id="input-ln"
+                        class="text-input"
                         v-model="form.lastName"
                         type="text"/>
                 </BFormGroup>
             </BCol>
         </BRow>
-        <BRow class="g-0">
-            <BCol cols="6">
+        <BRow class="g-0  mb-4">
+            <BCol cols="12" sm="6" class="pe-sm-2 mb-4 mb-sm-0">
                 <BFormGroup
                     id="checkbox-group-hf"
                     label="I am requesting help for: "
@@ -36,12 +37,13 @@
                 >
                     <BFormCheckboxGroup
                         id="checkbox-hf"
+                        class="checkbox-input"
                         v-model="form.helpForSelected"
                         :options="options.helpForOptions"
                         stacked/>
                 </BFormGroup>
             </BCol>
-            <BCol cols="6">
+            <BCol cols="12" sm="6" class="ps-sm-2">
                 <BFormGroup
                     id="checkbox-group-rf"
                     label="This request relates to: "
@@ -49,14 +51,15 @@
                 >
                     <BFormCheckboxGroup
                         id="checkbox-rf"
+                        class="checkbox-input"
                         v-model="form.requestForSelected"
                         :options="options.requestForOptions"
                         stacked/>
                 </BFormGroup>
             </BCol>
         </BRow>
-        <BRow class="g-0">
-            <BCol cols="7">
+        <BRow class="g-0 mb-4">
+            <BCol cols="12" sm="7" class="pe-sm-2 mb-4 mb-sm-0">
                 <BFormGroup
                     id="input-group-e"
                     label="Email"
@@ -64,11 +67,12 @@
                 >
                     <BFormInput
                         id="input-e"
+                        class="text-input"
                         v-model="form.email"
                         type="email"/>
                 </BFormGroup>
             </BCol>
-            <BCol cols="5">
+            <BCol cols="12" sm="5" class="ps-sm-2">
                 <BFormGroup
                     id="input-group-ph"
                     label="Phone"
@@ -76,12 +80,13 @@
                 >
                     <BFormInput
                         id="input-ph"
+                        class="text-input"
                         v-model="form.phone"
                         type="tel"/>
                 </BFormGroup>
             </BCol>
         </BRow>
-        <BRow class="g-0">
+        <BRow class="g-0 mb-4">
             <BCol cols="12">
                 <BFormGroup
                     id="checkbox-group-cm"
@@ -90,12 +95,13 @@
                 >
                     <BFormCheckboxGroup
                         id="checkbox-cm"
+                        class="checkbox-input"
                         v-model="form.contactMethodSelected"
                         :options="options.contactMethodOptions"/>
                 </BFormGroup>
             </BCol>
         </BRow>
-        <BRow class="g-0">
+        <BRow class="g-0 mb-4">
             <BCol cols="12">
                 <BFormGroup
                     id="textarea-group-sm"
@@ -104,18 +110,19 @@
                 >
                     <BFormTextarea 
                         id="textarea-sm"
+                        class="text-input"
                         v-model="form.shortMessage"
                         type="text"
                         placeholder="How I can help you or your child..."/>
                 </BFormGroup>
-                
             </BCol>
         </BRow>
-        <BButton type="submit" variant="primary-blue-4">Submit</BButton>
+        <BRow class="g-0 mb-4">
+            <BCol cols="12">
+                <BButton type="submit" variant="primary-blue-4"><span class="btn-text">Submit</span></BButton>
+            </BCol>
+        </BRow>
     </BForm>
-    <p>
-        {{ form }}
-    </p>
 </template>
 
 <script>

@@ -105,14 +105,57 @@ h3.sub-header {
     
 }
 
-input {
+label {
+    font-family: Poppins;
+    font-size: 18px;
+}
+
+.btn-text {
+    font-family: Poppins;
+    font-size: 18px;
+}
+
+.btn-primary-blue-4:hover {
+    background-color: white;
+    color: $primary-blue-4;
+}
+.btn-primary-blue-4:focus {
+    background-color: white;
+    color: $primary-blue-4;
+}
+.btn-primary-blue-4:active {
+    background-color: white;
+    color: $primary-blue-4;
+}
+
+.text-input {
     background-color: transparent !important;
-    border-width: 0 0 2px !important;
-    border-color: $primary-blue-5 !important;
+    border-color: $grayscale-4 !important;
     outline: 0 !important;
+
+    font-family: Poppins;
+    font-size: 18px;
 
     &:focus {
         border-color: $primary-green-3 !important;
+    }
+
+    &::placeholder {
+        font-family: Poppins;
+        font-size: 18px;
+    }
+}
+
+.form-check-input {
+    background-color: transparent !important;
+    border-color: $grayscale-4 !important;
+
+    &:focus {
+        border-color: $primary-green-3 !important;
+    }
+
+    &:checked {
+        background-color: $primary-blue-4 !important;
     }
 }
 
