@@ -1,14 +1,14 @@
 <template>
     <BContainer fluid class="strip bg-primary-blue-5">
         <BRow class="g-0 h-100">
-            <BCol class="d-flex align-items-center ps-2 pe-2 pt-5 pb-5 pt-xsm-0 pb-xsm-0 col-xsm-6" cols="12" sm="5" md="3">
+            <BCol class="d-flex align-items-center ps-4 pe-4 ps-sm-2 pe-sm-2 pt-5 pb-5 pt-sm-0 pb-sm-0" cols="12" sm="6" md="3">
                 <img
                     src="~/assets/logo.png"
                     alt="PSite Logo"
                     class="d-flex w-100">
             </BCol>
-            <BCol class="ps-3 pe-2 col-xsm-6" cols="12" sm="5" md="3">
-                <ul class="footer-list pb-3">
+            <BCol class="ps-3 pe-2" cols="12" sm="5" md="3" lg="2" offset="0" offset-sm="1" offset-md="0" offset-lg="1">
+                <ul class="footer-list pb-5 pt-5">
                     <li v-for="(page, index) in pages" :key="index" class="pt-3">
                         <NuxtLink :to="page.path" class="nav-link grayscale-1 footer-text">{{ page.name }}</NuxtLink>
                     </li>
