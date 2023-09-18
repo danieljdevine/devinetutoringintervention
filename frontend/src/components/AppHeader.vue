@@ -33,12 +33,6 @@
 </template>
 
 <style lang="scss">
-    .navbar {
-        height: 76px;
-        @media screen and (max-width: 768px) {
-            height: 58px;
-        }
-    }
     #logo {
         height: 50px;
         @media screen and (max-width: 768px) {
