@@ -3,6 +3,7 @@
   "compilerOptions": {
     "forceConsistentCasingInFileNames": true,
     "jsx": "preserve",
+    "jsxImportSource": "vue",
     "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "Node",
@@ -10,6 +11,8 @@
     "isolatedModules": true,
     "useDefineForClassFields": true,
     "strict": true,
+    "noImplicitThis": true,
+    "esModuleInterop": true,
     "allowJs": true,
     "noEmit": true,
     "resolveJsonModule": true,
@@ -78,12 +81,18 @@
     "./nuxt.d.ts",
     "../**/*",
     "../src/**/*",
+    "../node_modules/@bootstrap-vue-next/nuxt/runtime",
+    "../node_modules/@nuxtjs/google-fonts/runtime",
+    "../node_modules/@nuxt/telemetry/runtime",
     ".."
   ],
   "exclude": [
     "../node_modules",
     "../../node_modules",
     "../node_modules/nuxt/node_modules",
+    "../node_modules/@bootstrap-vue-next/nuxt/runtime/server",
+    "../node_modules/@nuxtjs/google-fonts/runtime/server",
+    "../node_modules/@nuxt/telemetry/runtime/server",
     "../dist",
     "../.output"
   ]

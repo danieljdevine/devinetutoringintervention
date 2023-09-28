@@ -1,5 +1,4 @@
 export default defineNuxtConfig({
-    mode: 'universal',
     head: {
       title: 'Devine Intervention Tutoring',
       meta: [
@@ -9,8 +8,6 @@ export default defineNuxtConfig({
       ]
     },
     build: {
-      vendor: ['axios'],
-      publicPath: `/${require('./secrets.json').NODE_ENV}/_nuxt/`,
       loaders: {
         sass: {
           implementation: require('sass'),
@@ -32,6 +29,5 @@ export default defineNuxtConfig({
     router: {
       base: `/`
     },
-    dev: process.env.NODE_ENV !== 'production',
     components: true
   });
