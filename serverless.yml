@@ -1,5 +1,6 @@
 service: dit
 frameworkVersion: "3"
+useDotenv: true
 
 provider:
   name: aws
@@ -9,7 +10,6 @@ provider:
 
 plugins:
   - serverless-s3-deploy
-  - serverless-dotenv-plugin
 
 custom:
   assets:

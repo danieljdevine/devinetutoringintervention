@@ -5,9 +5,9 @@
   "scripts": {
     "dev": "nuxt dev",
     "build": "nuxt generate",
-    "deploy": "sls deploy && sls s3deploy",
-    "buildDeploy": "nuxt generate && sls deploy && sls s3deploy",
-    "redeploy": "sls remove && sls deploy && sls s3deploy"
+    "deploy": "scripts/deploy.sh",
+    "redeploy": "scripts/redeploy.sh",
+    "buildDeploy": "nuxt generate && npm run deploy"
   },
   "keywords": [],
   "author": "",
@@ -21,7 +21,6 @@
     "bootstrap": "^5.3.1",
     "bootstrap-vue-next": "^0.10.10",
     "sass": "^1.66.1",
-    "serverless-dotenv-plugin": "^6.0.0",
     "serverless-s3-deploy": "^0.10.1"
   }
 }

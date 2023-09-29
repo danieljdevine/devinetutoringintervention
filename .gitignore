@@ -13,4 +13,4 @@
 **/.output/*
 
 # Static site files
-**/dist/*
+dist
