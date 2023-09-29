@@ -1,0 +1,110 @@
+service: dit
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  stage: ${opt:stage,'dev'}
+  region: ${env:AWS_REGION}
+
+plugins:
+  - serverless-s3-deploy
+  - serverless-dotenv-plugin
+
+custom:
+  assets:
+    targets:
+      - bucket: dit-site-bucket-${opt:stage,'dev'}
+        files:
+          - source: dist
+            globs: '**/*'
+
+resources:
+  Resources:
+    DITSiteS3Bucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: dit-site-bucket-${opt:stage,'dev'}
+        AccessControl: Private
+        BucketEncryption: 
+          ServerSideEncryptionConfiguration: 
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: aws:kms
+              KMSMasterKeyID: ${env:KMS_KEY}
+
+    DITSiteS3BucketPolicy:
+      Type: AWS::S3::BucketPolicy
+      DependsOn:
+        - DITSiteS3Bucket
+        - DITSiteCloudfrontDist
+      Properties:
+        Bucket:
+          Ref: DITSiteS3Bucket
+        PolicyDocument:
+          Statement:
+            - Effect: Allow
+              Principal:
+                Service:
+                  - "cloudfront.amazonaws.com"
+              Action:
+                - s3:GetObject
+              Resource:
+                Fn::Join:
+                  - ""
+                  -
+                    - "arn:aws:s3:::"
+                    - Ref: DITSiteS3Bucket
+                    - "/*"
+              Condition: 
+                StringEquals: 
+                  AWS:SourceArn:
+                    !Sub 
+                      - 'arn:aws:cloudfront::${AccountId}:distribution/${DistributionId}'
+                      - AccountId: '${env:ACCOUNT_ID}'
+                        DistributionId: !Ref DITSiteCloudfrontDist
+
+    DITSiteCloudfrontOAC:
+      Type: AWS::CloudFront::OriginAccessControl
+      Properties: 
+        OriginAccessControlConfig:
+            Name: DITSiteCloudfrontOAC
+            OriginAccessControlOriginType: s3
+            SigningBehavior: always
+            SigningProtocol: sigv4
+
+    DITSiteCloudfrontDist:
+      Type: AWS::CloudFront::Distribution
+      DependsOn:
+        - DITSiteS3Bucket
+        - DITSiteCloudfrontOAC
+      Properties:
+        DistributionConfig:
+          Origins:
+            - DomainName: "dit-site-bucket-${opt:stage,'dev'}.s3.${env:AWS_REGION}.amazonaws.com"
+              Id: dit-site-bucket-${opt:stage,'dev'}
+              S3OriginConfig:
+                OriginAccessIdentity: ""
+              OriginAccessControlId: !GetAtt DITSiteCloudfrontOAC.Id
+          Enabled: "true"
+          DefaultRootObject: index.html
+          CustomErrorResponses:
+            - ErrorCode: 404
+              ResponseCode: 404
+              ResponsePagePath: /404.html
+          HttpVersion: http2
+          DefaultCacheBehavior:
+            AllowedMethods:
+              - DELETE
+              - GET
+              - HEAD
+              - OPTIONS
+              - PATCH
+              - POST
+              - PUT
+            Compress: true
+            TargetOriginId: dit-site-bucket-${opt:stage,'dev'}
+            ForwardedValues:
+              QueryString: "false"
+              Cookies:
+                Forward: none
+            ViewerProtocolPolicy: redirect-to-https
