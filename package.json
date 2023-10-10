@@ -1,22 +1,19 @@
 {
-  "name": "frontend",
+  "name": "devineinterventiontutoring",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "dev": "nuxt dev",
-    "build": "nuxt build",
-    "deploy": "nuxt build && sls deploy"
+    "build": "nuxt generate",
+    "deploy": "scripts/deploy.sh",
+    "redeploy": "scripts/redeploy.sh",
+    "buildDeploy": "nuxt generate && npm run deploy"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^1.5.0",
-    "express": "^4.18.2",
-    "nuxt": "^3.7.0",
-    "serverless-apigw-binary": "^0.4.4",
-    "serverless-http": "^3.2.0"
+    "nuxt": "^3.7.4"
   },
   "devDependencies": {
     "@bootstrap-vue-next/nuxt": "^0.1.4",
@@ -24,6 +21,6 @@
     "bootstrap": "^5.3.1",
     "bootstrap-vue-next": "^0.10.10",
     "sass": "^1.66.1",
-    "serverless-domain-manager": "^7.1.2"
+    "serverless-s3-deploy": "^0.10.1"
   }
 }

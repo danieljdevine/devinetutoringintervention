@@ -1,0 +1,16 @@
+# Environment variables
+.env
+
+# Package directories
+**/node_modules/*
+**/jspm_packages/*
+
+# Serverless directories
+**/.serverless/*
+
+# Nuxt output directories
+**/.nuxt/*
+**/.output/*
+
+# Static site files
+dist
