@@ -1,0 +1,26 @@
+{
+  "name": "devineinterventiontutoring",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "dev": "nuxt dev",
+    "build": "nuxt generate",
+    "deploy": "scripts/deploy.sh",
+    "redeploy": "scripts/redeploy.sh",
+    "buildDeploy": "nuxt generate && npm run deploy"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "nuxt": "^3.7.4"
+  },
+  "devDependencies": {
+    "@bootstrap-vue-next/nuxt": "^0.1.4",
+    "@nuxtjs/google-fonts": "^3.0.2",
+    "bootstrap": "^5.3.1",
+    "bootstrap-vue-next": "^0.10.10",
+    "sass": "^1.66.1",
+    "serverless-s3-deploy": "^0.10.1"
+  }
+}
