@@ -13,7 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "nuxt": "^3.7.4"
+    "nuxt": "^3.13.1"
   },
   "devDependencies": {
     "@bootstrap-vue-next/nuxt": "^0.1.4",

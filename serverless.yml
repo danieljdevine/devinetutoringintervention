@@ -16,7 +16,7 @@ custom:
     targets:
       - bucket: dit-site-bucket-${opt:stage,'dev'}
         files:
-          - source: dist
+          - source: ./src
             globs: '**/*'
 
 resources:
@@ -63,20 +63,10 @@ resources:
                       - AccountId: '${env:ACCOUNT_ID}'
                         DistributionId: !Ref DITSiteCloudfrontDist
 
-    DITSiteCloudfrontOAC:
-      Type: AWS::CloudFront::OriginAccessControl
-      Properties: 
-        OriginAccessControlConfig:
-            Name: DITSiteCloudfrontOAC
-            OriginAccessControlOriginType: s3
-            SigningBehavior: always
-            SigningProtocol: sigv4
-
     DITSiteCloudfrontDist:
       Type: AWS::CloudFront::Distribution
       DependsOn:
         - DITSiteS3Bucket
-        - DITSiteCloudfrontOAC
       Properties:
         DistributionConfig:
           Origins:
@@ -84,7 +74,7 @@ resources:
               Id: dit-site-bucket-${opt:stage,'dev'}
               S3OriginConfig:
                 OriginAccessIdentity: ""
-              OriginAccessControlId: !GetAtt DITSiteCloudfrontOAC.Id
+              OriginAccessControlId: ${env:OAC_ID}
           Enabled: "true"
           DefaultRootObject: index.html
           CustomErrorResponses:
