@@ -22,7 +22,7 @@ export default defineNuxtConfig({
       families: {Poppins: true}
     },
     css: ['bootstrap/dist/css/bootstrap.min.css'],
-    srcDir: 'src/',
+    srcDir: 'src/frontend/',
     performance: {
       gzip: false
     },
