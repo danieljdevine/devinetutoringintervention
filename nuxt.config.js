@@ -17,7 +17,11 @@ export default defineNuxtConfig({
         },
       },
     },
-    modules: ['@bootstrap-vue-next/nuxt', '@nuxtjs/google-fonts'],
+    plugins: ['~/plugins/google-recaptcha'],
+    modules: [
+      '@bootstrap-vue-next/nuxt',
+      '@nuxtjs/google-fonts'
+    ],
     googleFonts: {
       families: {Poppins: true}
     },

@@ -39,3 +39,12 @@
         </BContainer>
     </div>
 </template>
+
+<script>
+export default {
+    mounted() {
+        const badge = document.querySelector('.grecaptcha-badge');
+        if (badge) badge.style.visibility = 'hidden';
+    }
+}
+</script>

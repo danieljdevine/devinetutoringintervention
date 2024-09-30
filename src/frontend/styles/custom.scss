@@ -25,7 +25,10 @@ $theme-colors: (
     "grayscale-2": $grayscale-2,
     "grayscale-3": $grayscale-3,
     "grayscale-4": $grayscale-4,
-    "grayscale-5": $grayscale-5
+    "grayscale-5": $grayscale-5,
+    "primary-red-1": $primary-red-1,
+    "primary-red-2": $primary-red-2,
+    "primary-red-3": $primary-red-3
 );
 
 $grid-breakpoints: (
@@ -39,7 +42,7 @@ $grid-breakpoints: (
   xxxl: 1600px,
   xxxxl: 2000px
 );
-@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+@import "../../../node_modules/bootstrap/scss/bootstrap.scss";
 
 @import "components.scss";
 

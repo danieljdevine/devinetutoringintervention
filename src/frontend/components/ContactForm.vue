@@ -9,6 +9,7 @@
                 >
                     <BFormInput
                         id="input-fn"
+                        name="First Name"
                         class="text-input"
                         v-model="form.firstName"
                         type="text"/>
@@ -22,13 +23,14 @@
                 >
                     <BFormInput
                         id="input-ln"
+                        name="Last Name"
                         class="text-input"
                         v-model="form.lastName"
                         type="text"/>
                 </BFormGroup>
             </BCol>
         </BRow>
-        <BRow class="g-0  mb-4">
+        <BRow class="g-0 mb-4">
             <BCol cols="12" sm="6" class="pe-sm-2 mb-4 mb-sm-0">
                 <BFormGroup
                     id="checkbox-group-hf"
@@ -37,6 +39,7 @@
                 >
                     <BFormCheckboxGroup
                         id="checkbox-hf"
+                        name="Help For"
                         class="checkbox-input"
                         v-model="form.helpForSelected"
                         :options="options.helpForOptions"
@@ -51,6 +54,7 @@
                 >
                     <BFormCheckboxGroup
                         id="checkbox-rf"
+                        name="Request For"
                         class="checkbox-input"
                         v-model="form.requestForSelected"
                         :options="options.requestForOptions"
@@ -67,6 +71,7 @@
                 >
                     <BFormInput
                         id="input-e"
+                        name="Email"
                         class="text-input"
                         v-model="form.email"
                         type="email"/>
@@ -80,6 +85,7 @@
                 >
                     <BFormInput
                         id="input-ph"
+                        name="Phone"
                         class="text-input"
                         v-model="form.phone"
                         type="tel"/>
@@ -95,6 +101,7 @@
                 >
                     <BFormCheckboxGroup
                         id="checkbox-cm"
+                        name="Preferred Contact Method"
                         class="checkbox-input"
                         v-model="form.contactMethodSelected"
                         :options="options.contactMethodOptions"/>
@@ -110,6 +117,7 @@
                 >
                     <BFormTextarea 
                         id="textarea-sm"
+                        name="Short Message"
                         class="text-input"
                         v-model="form.shortMessage"
                         type="text"
@@ -126,32 +134,42 @@
 </template>
 
 <script>
-    import { reactive, defineComponent } from 'vue';
+import { reactive, defineComponent } from 'vue';
+import { useReCaptcha } from 'vue-recaptcha-v3';
 
-    export default defineComponent({
-        setup(_, { emit }) {
-            const options = {
-                helpForOptions: ['Myself', 'My Child'],
-                requestForOptions: ['Dyslexia Intervention', 'Tutoring', 'Study and Organization Skills'],
-                contactMethodOptions: ['Email', 'Text', 'Phone Call']
-            }
+export default defineComponent({
+    setup(_, { emit }) {
+        const options = {
+            helpForOptions: ['Myself', 'My Child'],
+            requestForOptions: ['Dyslexia Intervention', 'Tutoring', 'Study and Organization Skills'],
+            contactMethodOptions: ['Email', 'Text', 'Phone Call']
+        };
 
-            const form = reactive({
-                formKey: 0,
-                firstName: '',
-                lastName: '',
-                helpForSelected: [],
-                requestForSelected: [],
-                email: '',
-                phone: '',
-                contactMethodSelected: [],
-                shortMessage: ''
-            });
+        const form = reactive({
+            formKey: 0,
+            firstName: '',
+            lastName: '',
+            helpForSelected: [],
+            requestForSelected: [],
+            email: '',
+            phone: '',
+            contactMethodSelected: [],
+            shortMessage: ''
+        });
 
-            function onSubmit(event) {
-                event.preventDefault();
+        const { executeRecaptcha, recaptchaLoaded } = useReCaptcha();
 
-                emit('formSubmission', form);
+        async function onSubmit() {
+            try {
+                await recaptchaLoaded();
+                const token = await executeRecaptcha('submit_form');
+                
+                const formDataWithToken = {
+                    ...form,
+                    recaptchaToken: token
+                };
+
+                emit('formSubmission', formDataWithToken);
 
                 form.formKey++;
                 form.firstName = '';
@@ -162,10 +180,14 @@
                 form.phone = '';
                 form.contactMethodSelected = [];
                 form.shortMessage = '';
-            };
 
-            return { form, options, onSubmit };
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                emit('formError', error);
+            }
         }
-        
-    });
+
+        return { form, options, onSubmit };
+    }
+});
 </script>

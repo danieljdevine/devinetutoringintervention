@@ -111,6 +111,9 @@ export default {
     };
   },
   mounted() {
+    const badge = document.querySelector('.grecaptcha-badge');
+    if (badge) badge.style.visibility = 'hidden';
+    
     setTimeout(() => {
       this.loaded = true;
       setTimeout(() => {
@@ -118,7 +121,7 @@ export default {
       }, 1400); 
     }, 100);
   }
-};
+}
 </script>
 
 <style lang="scss">
@@ -161,5 +164,5 @@ export default {
   }
 </style>
 <style>
-  @import '../../node_modules/bootstrap-vue-next/dist/bootstrap-vue-next.css';
+  @import '../../../node_modules/bootstrap-vue-next/dist/bootstrap-vue-next.css';
 </style>

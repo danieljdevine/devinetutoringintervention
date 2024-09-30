@@ -42,6 +42,10 @@ import { ref } from 'vue';
 
 export default {
     name: 'Testimonials',
+    mounted() {
+        const badge = document.querySelector('.grecaptcha-badge');
+        if (badge) badge.style.visibility = 'hidden';
+    },
     setup() {
         const testimonials = ref([
             {
